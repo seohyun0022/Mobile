@@ -8,5 +8,31 @@
         {"name": "유저4", "id": "user4"},
         {"name": "유저5", "id": "user5"},
         {"name": "유저6", "id": "user6"}
+    ],
+    "reviews": [
+        {
+            "place_name": "장소 이름 1",
+            "rating": 4.5,
+            "review_text": "매우 만족스러운 경험이었습니다.",
+            "image_url": "review_image1"
+        },
+        {
+            "place_name": "장소 이름 2",
+            "rating": 3.5,
+            "review_text": "괜찮은 경험이었습니다.",
+            "image_url": "review_image2"
+        },
+        {
+            "place_name": "맛있는 식당",
+            "rating": 5.0,
+            "review_text": "최고의 맛집이었습니다!",
+            "image_url": "restaurant_image"
+        },
+        {
+            "place_name": "아름다운 카페",
+            "rating": 4.0,
+            "review_text": "분위기가 좋고 커피도 맛있었어요.",
+            "image_url": "cafe_image"
+        }
     ]
 } 
