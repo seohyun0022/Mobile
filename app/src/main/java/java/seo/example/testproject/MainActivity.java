@@ -1,4 +1,4 @@
-package seo.example.testproject;
+package java.seo.example.testproject;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
