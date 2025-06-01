@@ -1,0 +1,12 @@
+{
+    "followers": [
+        {"name": "유저1", "id": "user1"},
+        {"name": "유저2", "id": "user2"},
+        {"name": "유저3", "id": "user3"}
+    ],
+    "following": [
+        {"name": "유저4", "id": "user4"},
+        {"name": "유저5", "id": "user5"},
+        {"name": "유저6", "id": "user6"}
+    ]
+} 
