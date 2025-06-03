@@ -52,4 +52,7 @@ dependencies {
     // Google Location Services API (현재 위치 가져오기 위해 필요)
     implementation ("com.google.android.gms:play-services-location:21.0.1") // 최신 버전 확인
 
+    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
+    implementation ("androidx.security:security-crypto:1.1.0-alpha06") // EncryptedSharedPreferences (선택 사항, 보안 강화)
 }
