@@ -25,7 +25,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:scaleType="fitCenter"
-
+                android:src="@drawable/user"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/user_name"
@@ -91,125 +91,13 @@
                 app:layout_constraintRight_toRightOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!-- 리뷰 컨테이너 -->
         <LinearLayout
+            android:id="@+id/review_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp" />
 
-            <!-- 리뷰 -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:padding="12dp"
-                android:layout_marginBottom="12dp">
-
-                <ImageView
-                    android:id="@+id/review_image1"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:scaleType="fitCenter"
-
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent" />
-
-                <TextView
-                    android:id="@+id/place_name1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="장소 이름 1"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/review_image1"
-                    android:layout_marginEnd="8dp" />
-
-                <RatingBar
-                    android:id="@+id/review_rating1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:stepSize="0.5"
-                    android:isIndicator="true"
-                    app:layout_constraintTop_toBottomOf="@id/place_name1"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/review_text1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="내용"
-                    android:textSize="14sp"
-                    android:textColor="#555555"
-                    android:maxLines="2"
-                    android:ellipsize="end"
-                    app:layout_constraintTop_toBottomOf="@id/review_rating1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/review_image1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="8dp" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:padding="12dp"
-                android:layout_marginBottom="12dp">
-
-                <ImageView
-                    android:id="@+id/review_image2"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/user"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent" />
-
-                <TextView
-                    android:id="@+id/place_name2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="장소 이름 2"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/review_image2"
-                    android:layout_marginEnd="8dp" />
-
-                <RatingBar
-                    android:id="@+id/review_rating2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:stepSize="0.5"
-                    android:isIndicator="true"
-                    app:layout_constraintTop_toBottomOf="@id/place_name2"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/review_text2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="내용"
-                    android:textSize="14sp"
-                    android:textColor="#555555"
-                    android:maxLines="2"
-                    android:ellipsize="end"
-                    app:layout_constraintTop_toBottomOf="@id/review_rating2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/review_image2"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="8dp" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </LinearLayout>
     </LinearLayout>
 </ScrollView>
