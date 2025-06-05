@@ -18,39 +18,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestProject"
-        tools:targetApi="34">
+        tools:targetApi="34"
+        android:usesCleartextTraffic="true">
         <meta-data
             android:name="com.naver.maps.map.NCP_KEY_ID"
             android:value="ka1dsoky2t" />
 
-
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false">
+            android:name=".LoginActivity" android:exported="false">
 
         </activity>
         <activity
-            android:name=".MyPageActivity"
-            android:exported="false" />
+            android:name=".MyPageActivity" android:exported="false" />
         <activity
-            android:name=".StartActivity"
-            android:exported="true">
+            android:name=".StartActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignupActivity"
-            android:exported="false" />
+            android:name=".SignupActivity" android:exported="false" />
         <activity
-            android:name=".SignupCompleteActivity"
-            android:exported="false" />
-
-
+            android:name=".SignupCompleteActivity" android:exported="false" />
+        <activity android:name=".NavigationActivity" android:exported="false"/>
+        <activity android:name=".userpage" android:exported="false"/>
 
     </application>
 

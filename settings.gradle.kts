@@ -14,4 +14,4 @@ pluginManagement {
 
 rootProject.name = "TestProject"
 include(":app")
- 
+include(":01_fragdptest")
