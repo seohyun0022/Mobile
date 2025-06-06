@@ -1,26 +1,52 @@
 package com.example.demo.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-
 import java.math.BigDecimal;
 
-/**
- * DTO defining the data received from the client for a review creation request.
- * 클라이언트로부터 리뷰 생성 요청 시 받는 데이터를 정의하는 DTO입니다.
- */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class ReviewCreateRequest {
-    private int userNumber;      // 리뷰 작성자의 user_number
-    private String storeName;    // 가게 이름
-    private BigDecimal latitude; // 위도 (정확도를 위해 BigDecimal 사용)
-    private BigDecimal longitude; // 경도 (정확도를 위해 BigDecimal 사용)
-    private String imagePath;    // 이미지 경로 (선택 사항)
-    private String title;        // 리뷰 제목
-    private String body;         // 리뷰 본문 내용
+    private Integer userNumber;
+    private String placeName;
+    private BigDecimal latitude;
+    private BigDecimal longitude;
+    private String imageUrl;
+    private BigDecimal rating; // Double 타입
+    private String title;
+    private String reviewText; // reviewText로 통일
+
+    // All-args constructor: 인자 순서와 타입을 정확히 맞춰야 합니다.
+    public ReviewCreateRequest(Integer userNumber, String placeName, BigDecimal latitude,
+                               BigDecimal longitude, String imageUrl, BigDecimal rating, // <-- rating이 이곳에 위치
+                               String title, String reviewText) {
+        this.userNumber = userNumber;
+        this.placeName = placeName;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.imageUrl = imageUrl;
+        this.rating = rating;
+        this.title = title;
+        this.reviewText = reviewText;
+    }
+
+    // Default constructor (for JSON deserialization)
+    public ReviewCreateRequest() {
+    }
+
+    // Getters
+    public Integer getUserNumber() { return userNumber; }
+    public String getPlaceName() { return placeName; }
+    public BigDecimal getLatitude() { return latitude; }
+    public BigDecimal getLongitude() { return longitude; }
+    public String getImageUrl() { return imageUrl; }
+    public BigDecimal getRating() { return rating; }
+    public String getTitle() { return title; }
+    public String getReviewText() { return reviewText; }
+
+    // Setters
+    public void setUserNumber(Integer userNumber) { this.userNumber = userNumber; }
+    public void setPlaceName(String placeName) { this.placeName = placeName; }
+    public void setLatitude(BigDecimal latitude) { this.latitude = latitude; }
+    public void setLongitude(BigDecimal longitude) { this.longitude = longitude; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+    public void setRating(BigDecimal rating) { this.rating = rating; }
+    public void setTitle(String title) { this.title = title; }
+    public void setReviewText(String reviewText) { this.reviewText = reviewText; }
 }

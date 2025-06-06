@@ -1,50 +1,139 @@
 package com.example.demo.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import jakarta.persistence.*; // Spring Boot 3.x에서는 jakarta.persistence 사용
-import java.math.BigDecimal; // DECIMAL 타입 매핑을 위해 추가
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
-/**
- * Review entity maps to the 'Review' table in MySQL.
- * It directly includes store information (name, latitude, longitude) as fields.
- * 리뷰 엔티티는 MySQL의 'Review' 테이블에 매핑됩니다.
- * 가게 정보(이름, 위도, 경도)를 필드로 직접 포함합니다.
- */
+import java.math.BigDecimal; // BigDecimal import 추가
+
 @Entity
-@Table(name = "Review")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "Review") // 테이블 이름은 올려주신 DDL과 동일하게 'Review'로 가정합니다.
 public class Review {
 
-    @Id // 기본 키를 나타냅니다.
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동 증가 전략을 사용합니다.
-    @Column(name = "review_id") // 데이터베이스 컬럼명 지정
-    private int reviewId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "review_id")
+    private Integer reviewId;
 
-    @ManyToOne(fetch = FetchType.LAZY) // User 엔티티와의 다대일(N:1) 관계를 나타냅니다. (지연 로딩)
-    @JoinColumn(name = "user_number", nullable = false) // Review 테이블의 'user_number' 컬럼이 User 엔티티의 기본 키를 참조합니다.
-    private User user; // 리뷰를 작성한 User 엔티티
+    @ManyToOne
+    @JoinColumn(name = "user_number", nullable = false)
+    private User user;
 
-    @Column(name = "store_name", nullable = false, length = 100) // 가게 이름 컬럼
+    @Column(name = "store_name", nullable = false, length = 100)
     private String storeName;
 
-    @Column(name = "latitude", precision = 10, scale = 7) // 위도 컬럼 (DECIMAL(10, 7) 매핑)
-    private BigDecimal latitude;
-
-    @Column(name = "longitude", precision = 10, scale = 7) // 경도 컬럼 (DECIMAL(10, 7) 매핑)
-    private BigDecimal longitude;
-
-    @Column(name = "image_path", length = 255) // 이미지 경로 컬럼
+    @Column(name = "image_path", length = 255) // DDL에 따라 nullable
     private String imagePath;
 
-    @Column(name = "title", length = 200) // 타이틀 컬럼
+    // DDL에 DECIMAL(10, 7)로 정의되었으므로 BigDecimal 사용
+    @Column(name = "latitude", precision = 10, scale = 7, nullable = true) // DDL에 따라 nullable
+    private BigDecimal latitude;
+
+    // DDL에 DECIMAL(10, 7)로 정의되었으므로 BigDecimal 사용
+    @Column(name = "longitude", precision = 10, scale = 7, nullable = true) // DDL에 따라 nullable
+    private BigDecimal longitude;
+
+    @Column(name = "title", length = 200) // DDL에 따라 nullable
     private String title;
 
-    @Column(name = "body", columnDefinition = "TEXT") // 본문 컬럼 (긴 텍스트를 위해 TEXT 타입 매핑)
+    @Column(name = "body", columnDefinition = "TEXT") // DDL에 따라 TEXT 타입 매핑
     private String body;
+
+    // DDL에 DECIMAL(2, 1)로 정의되었으므로 BigDecimal 사용
+    @Column(name = "rating", precision = 2, scale = 1, nullable = true) // DDL에 따라 nullable
+    private BigDecimal rating;
+
+    // 기본 생성자
+    public Review() {}
+
+    // 모든 필드를 포함하는 생성자 (옵션)
+    public Review(Integer reviewId, User user, String storeName, String imagePath, BigDecimal latitude, BigDecimal longitude, String title, String body, BigDecimal rating) {
+        this.reviewId = reviewId;
+        this.user = user;
+        this.storeName = storeName;
+        this.imagePath = imagePath;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.title = title;
+        this.body = body;
+        this.rating = rating;
+    }
+
+    // Getters and Setters
+    public Integer getReviewId() {
+        return reviewId;
+    }
+
+    public void setReviewId(Integer reviewId) {
+        this.reviewId = reviewId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
+
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public BigDecimal getRating() {
+        return rating;
+    }
+
+    public void setRating(BigDecimal rating) {
+        this.rating = rating;
+    }
 }

@@ -97,35 +97,21 @@ public class UserService {
         return new LoginResponse(dummyToken, user.getId(), user.getUserName(), user.getUserNumber());
     }
 
-    /**
-     * Retrieves user information by user ID (String). (User load by ID)
-     * @param id User ID to retrieve
-     * @return Optional<UserResponse> object
-     */
+    
     @Transactional(readOnly = true)
     public Optional<UserResponse> getUserById(String id) {
         return userRepository.findById(id)
                 .map(UserResponse::new); // Convert User entity to UserResponse DTO
     }
 
-    /**
-     * Retrieves user information by user number (int). (User load by user_number)
-     * @param userNumber User number to retrieve
-     * @return Optional<UserResponse> object
-     */
+    
     @Transactional(readOnly = true)
     public Optional<UserResponse> getUserByNumber(int userNumber) {
         return userRepository.findByUserNumber(userNumber)
                 .map(UserResponse::new); // Convert User entity to UserResponse DTO
     }
 
-    /**
-     * Updates user information. (User information update)
-     * @param id User ID to update
-     * @param updateRequest DTO containing fields to update
-     * @return Updated UserResponse DTO
-     * @throws IllegalArgumentException if user is not found or date format is invalid
-     */
+    
     @Transactional
     public UserResponse updateUser(String id, UserUpdateRequest updateRequest) {
         Optional<User> optionalUser = userRepository.findById(id);

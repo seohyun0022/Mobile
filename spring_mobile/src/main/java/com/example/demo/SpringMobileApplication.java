@@ -6,11 +6,12 @@ import com.example.demo.entity.Follower;
 import com.example.demo.service.UserService;
 import com.example.demo.service.ReviewService;
 import com.example.demo.service.FollowService;
-//import com.example.demo.service.LikesService; // LikesService import 추가
+import com.example.demo.service.LikesService; // LikesService import 추가
 import com.example.demo.repository.FollowerRepository;
 import com.example.demo.dto.ReviewCreateRequest;
 import com.example.demo.dto.UserRegisterRequest;
-//import com.example.demo.dto.LikeRequest; // LikeRequest DTO import 추가
+import com.example.demo.dto.LikeRequest; // LikeRequest DTO import 추가
+import com.example.demo.dto.ReviewResponse; // ReviewResponse import 추가 (review1, review2 변수 타입 변경)
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -35,8 +36,8 @@ public class SpringMobileApplication {
     private ReviewService reviewService;
     @Autowired
     private FollowService followService;
-   // @Autowired
-   // private LikesService likesService; // LikesService 주입 추가
+    @Autowired // LikesService 주입 추가
+    private LikesService likesService;
     @Autowired
     private FollowerRepository followerRepository;
     @Autowired
@@ -128,25 +129,37 @@ public class SpringMobileApplication {
             }
 
             // 2. 테스트 리뷰 등록
-            Review review1 = null;
-            Review review2 = null;
+            ReviewResponse review1Response = null; // Review -> ReviewResponse로 타입 변경
+            ReviewResponse review2Response = null; // Review -> ReviewResponse로 타입 변경
 
             if (user1 != null) {
-                ReviewCreateRequest req1 = new ReviewCreateRequest(
-                        user1.getUserNumber(), "피자맛집", new BigDecimal("37.5670135"), new BigDecimal("126.978147"),
-                        "http://example.com/pizza.jpg", "최고의 피자!", "여기 피자는 정말 환상적입니다. 꼭 드셔보세요!"
-                );
-                review1 = reviewService.createReview(req1).toEntity(); // DTO를 엔티티로 변환하여 저장
-                System.out.println("Review 1 created by " + user1.getUserName() + " (Review ID: " + review1.getReviewId() + ")");
+            	ReviewCreateRequest req1 = new ReviewCreateRequest(
+            		    user1.getUserNumber(),
+            		    "피자맛집",
+            		    new BigDecimal("37.5670135"),
+            		    new BigDecimal("126.978147"),
+            		    "http://example.com/pizza.jpg",
+            		    new BigDecimal("4.5"), // Double -> BigDecimal로 수정
+            		    "최고의 피자!",
+            		    "여기 피자는 정말 환상적입니다. 꼭 드셔보세요!"
+            		);
+                review1Response = reviewService.createReview(req1);
+                System.out.println("Review 1 created by " + user1.getUserName() + " (Review ID: " + review1Response.getReviewId() + ")");
             }
 
             if (user2 != null) {
                 ReviewCreateRequest req2 = new ReviewCreateRequest(
-                        user2.getUserNumber(), "커피향가득", new BigDecimal("37.5000000"), new BigDecimal("127.0500000"),
-                        null, "분위기 좋은 카페", "커피 맛도 좋고, 조용해서 작업하기 좋아요."
+                        user2.getUserNumber(),
+                        "커피향가득",
+                        new BigDecimal("37.5000000"),
+                        new BigDecimal("127.0500000"),
+                        null,
+                        new BigDecimal("3.8"), // Double -> BigDecimal로 수정
+                        "분위기 좋은 카페",
+                        "커피 맛도 좋고, 조용해서 작업하기 좋아요."
                 );
-                review2 = reviewService.createReview(req2).toEntity(); // DTO를 엔티티로 변환하여 저장
-                System.out.println("Review 2 created by " + user2.getUserName() + " (Review ID: " + review2.getReviewId() + ")");
+                review2Response = reviewService.createReview(req2);
+                System.out.println("Review 2 created by " + user2.getUserName() + " (Review ID: " + review2Response.getReviewId() + ")");
             }
 
             // 3. 테스트 팔로우 관계 등록
@@ -175,25 +188,23 @@ public class SpringMobileApplication {
                 }
             }
 
-            /* 4. 테스트 좋아요 관계 등록 (새로 추가된 부분)
-            if (user1 != null && review2 != null) { // user1이 review2에 좋아요
+            // 4. 테스트 좋아요 관계 등록 (새로 추가된 부분 주석 해제 및 수정)
+            if (user1 != null && review2Response != null) { // user1이 review2에 좋아요
                 try {
-                    LikeRequest likeRequest = new LikeRequest(user1.getUserNumber(), review2.getReviewId());
-                    likesService.addLike(likeRequest);
-                    System.out.println(user1.getUserName() + " liked Review ID: " + review2.getReviewId());
+                    likesService.toggleLike(review2Response.getReviewId().longValue(), user1.getUserNumber()); // ReviewId를 Long으로 변환
+                    System.out.println(user1.getUserName() + " liked Review ID: " + review2Response.getReviewId());
                 } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                 }
             }
-            if (user3 != null && review1 != null) { // user3이 review1에 좋아요
+            if (user3 != null && review1Response != null) { // user3이 review1에 좋아요
                 try {
-                    LikeRequest likeRequest = new LikeRequest(user3.getUserNumber(), review1.getReviewId());
-                    likesService.addLike(likeRequest);
-                    System.out.println(user3.getUserName() + " liked Review ID: " + review1.getReviewId());
+                    likesService.toggleLike(review1Response.getReviewId().longValue(), user3.getUserNumber()); // ReviewId를 Long으로 변환
+                    System.out.println(user3.getUserName() + " liked Review ID: " + review1Response.getReviewId());
                 } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                 }
-            }*/
+            }
 
             System.out.println("--- Data initialization complete ---");
         };
